@@ -18,7 +18,7 @@ The **OpenQP Input Generator** is a user-friendly web-based tool designed to cre
    - **Functional**: Similarly, choose the functional using the dropdown or search bar.  
 
 4. **Modify Options**:  
-   Adjust additional options like **charge**, **multiplicity**, or **NState** (for TDHF calculations).  
+   Adjust additional options like **charge** or **multiplicity**.  
 
 5. **Save Files**:  
    - Click **"Save Input & Geometry"** to download the `.inp` and `.xyz` files for use with OpenQP.  
