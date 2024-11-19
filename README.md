@@ -2,7 +2,7 @@
 
 The **OpenQP Input Generator** is a user-friendly web-based tool designed to create and manage input files for the [Open Quantum Platform (OpenQP)](https://github.com/Open-Quantum-Platform/openqp). It simplifies the preparation of input files for quantum chemical calculations using OpenQP's powerful features, including MRSF-TDDFT.  
 
----
+
 
 ## Usage Instructions
 1. **Access the Tool**:  
