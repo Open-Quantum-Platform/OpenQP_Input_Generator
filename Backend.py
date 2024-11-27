@@ -14,7 +14,7 @@ os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 @app.route("/submit-job", methods=["POST"])
 def submit_job():
     try:
-        # Save input files
+ 
         system_name = request.form["systemName"]
         geometry = request.form["geometry"]
         input_content = request.form["input"]
@@ -29,7 +29,6 @@ def submit_job():
         with open(inp_path, "w") as inp_file:
             inp_file.write(input_content)
 
-        # Run Docker command
         docker_command = [
             "docker", "run", "--rm",
             "-v", f"{os.path.abspath(UPLOAD_FOLDER)}:/data",
