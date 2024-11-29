@@ -1127,6 +1127,7 @@ button:active {
  # OpenQP Input Preview
             </textarea>
             <button type="button" onclick="saveAndDownloadFiles()">Save Input & Geometry</button>
+            <button type="button" onclick="submitJob()">Run Calculation</button>
             <div style="margin-top: 1.5em;">
                 <h3>Useful Links</h3>
                 <ul style="list-style-type: none; padding-left: 0; margin: 0;">
@@ -1485,7 +1486,38 @@ max_grad=1e-3
                     `;
              }
         }
+        async function submitJob() {
+            const systemName = document.getElementById("systemName").value || "geo";
+            const geometry = document.getElementById("geometry").value.trim();
+            const inputContent = document.getElementById("inputPreview").value;
 
+            if (!geometry || !inputContent) {
+                alert("Please provide valid geometry and input files.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("systemName", systemName);
+            formData.append("geometry", geometry);
+            formData.append("input", inputContent);
+
+            try {
+                const response = await fetch("/submit-job", {
+                    method: "POST",
+                    body: formData,
+                });
+                const result = await response.json();
+                if (result.success) {
+                    alert("Job submitted successfully! Log file is being processed.");
+                    displayResults(result.logFile);
+                } else {
+                    alert("Failed to submit job: " + result.error);
+                }
+            } catch (error) {
+                console.error("Error submitting job:", error);
+                alert("An error occurred while submitting the job.");
+            }
+        }
 
         // Modified loadGeometryFromFile function
         function loadGeometryFromFile() {
