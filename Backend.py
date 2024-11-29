@@ -11,10 +11,13 @@ DOCKER_IMAGE = "openqp/openqp:v1.0"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
+@app.route("/")
+def home():
+    return "Welcome to the OpenQP Backend! Use the /submit-job endpoint for job submissions."
+
 @app.route("/submit-job", methods=["POST"])
 def submit_job():
     try:
- 
         system_name = request.form["systemName"]
         geometry = request.form["geometry"]
         input_content = request.form["input"]
@@ -38,11 +41,9 @@ def submit_job():
         ]
         subprocess.run(docker_command, check=True)
 
-        # Check if log file exists
         if not os.path.exists(log_path):
             return jsonify({"success": False, "error": "Log file not found."})
 
-        # Return log file content
         with open(log_path, "r") as log_file:
             log_content = log_file.read()
 
