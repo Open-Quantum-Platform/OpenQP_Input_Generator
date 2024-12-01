@@ -42,7 +42,7 @@ def submit_job():
             "-v", f"{os.path.abspath(UPLOAD_FOLDER)}:/data",
             "-v", f"{os.path.abspath(OUTPUT_FOLDER)}:/results",
             DOCKER_IMAGE,
-            "bash", "-c", f"openqp /data/{system_name}.inp"
+            "bash", "-c", f"openqp ../data/{system_name}.inp"
         ]
 
         subprocess.run(docker_command, check=True)
