@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import os
 import subprocess
 
 app = Flask(__name__)
+CORS(app)  
 
 UPLOAD_FOLDER = "./uploads"
 OUTPUT_FOLDER = "./outputs"
@@ -13,10 +15,12 @@ os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 @app.route("/")
 def home():
+    """Home route to verify backend is running."""
     return "Welcome to the OpenQP Backend! Use the /submit-job endpoint for job submissions."
 
 @app.route("/submit-job", methods=["POST"])
 def submit_job():
+    """Endpoint to handle job submissions."""
     try:
         system_name = request.form["systemName"]
         geometry = request.form["geometry"]
@@ -28,9 +32,10 @@ def submit_job():
 
         with open(geo_path, "w") as geo_file:
             geo_file.write(geometry)
-
         with open(inp_path, "w") as inp_file:
             inp_file.write(input_content)
+
+        subprocess.run(["dos2unix", geo_path, inp_path], check=True)
 
         docker_command = [
             "docker", "run", "--rm",
@@ -49,6 +54,8 @@ def submit_job():
 
         return jsonify({"success": True, "logFile": log_content})
 
+    except subprocess.CalledProcessError as e:
+        return jsonify({"success": False, "error": f"Docker command failed: {e}"})
     except Exception as e:
         return jsonify({"success": False, "error": str(e)})
 
