@@ -38,12 +38,13 @@ def submit_job():
         subprocess.run(["dos2unix", geo_path, inp_path], check=True)
 
         docker_command = [
-            "docker", "run", "--rm",
+            "docker", "run", "-it", "--rm",
             "-v", f"{os.path.abspath(UPLOAD_FOLDER)}:/data",
             "-v", f"{os.path.abspath(OUTPUT_FOLDER)}:/results",
             DOCKER_IMAGE,
-            f"/data/{system_name}.inp"
+            "bash", "-c", f"openqp /data/{system_name}.inp"
         ]
+
         subprocess.run(docker_command, check=True)
 
         if not os.path.exists(log_path):
