@@ -39,7 +39,7 @@ Run quantum chemical calculations on your local machine by pulling the Docker im
 2. **Run the initiator**:
    Start the program on your web browser:
    ```bash
-   python3 Backend.py
+   python3 run_openqp.py
    ```
 
 ---
