@@ -1490,24 +1490,20 @@ max_grad=1e-3
              }
         }
         async function submitJob() {
-            // Retrieve values from input fields
             const systemName = document.getElementById("systemName").value || "geo";
             const geometry = document.getElementById("geometry").value.trim();
             const inputContent = document.getElementById("inputPreview").value;
 
-            // Validate the input fields
             if (!geometry || !inputContent) {
                 alert("Please provide valid geometry and input files.");
                 return;
             }
 
-            // Create a FormData object to send the form data to the backend
             const formData = new FormData();
             formData.append("systemName", systemName);
             formData.append("geometry", geometry);
             formData.append("input", inputContent);
 
-            // Create a new job status element dynamically
             const jobStatusContainer = document.getElementById("jobStatusContainer");
             const jobElement = document.createElement("div");
             jobElement.id = `job-${systemName}`;
@@ -1515,7 +1511,6 @@ max_grad=1e-3
             jobElement.style.padding = "1em";
             jobElement.style.marginBottom = "1em";
 
-            // Add initial job status details
             const currentTime = new Date();
             jobElement.innerHTML = `
                 <p><strong>Job Name:</strong> ${systemName}</p>
@@ -1525,7 +1520,6 @@ max_grad=1e-3
             `;
             jobStatusContainer.appendChild(jobElement);
 
-            // Start tracking elapsed time
             const startTime = Date.now();
             const elapsedInterval = setInterval(() => {
                 const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
@@ -1533,19 +1527,16 @@ max_grad=1e-3
             }, 1000);
 
             try {
-                // Send a POST request to the backend
                 const response = await fetch("http://127.0.0.1:5000/submit-job", {
                     method: "POST",
                     body: formData,
                 });
 
-                // Handle the server response
                 if (response.ok) {
-                    const result = await response.json(); // Parse the JSON response
+                    const result = await response.json(); 
                     if (result.success) {
                         document.getElementById(`status-${systemName}`).textContent = "Completed";
 
-                        // Add download button for the log file
                         const downloadButton = document.createElement("button");
                         downloadButton.textContent = "Download Log File";
                         downloadButton.style.marginTop = "1em";
@@ -1563,7 +1554,7 @@ max_grad=1e-3
                 document.getElementById(`status-${systemName}`).textContent = "Error submitting job";
                 appendErrorDetails(jobElement, error.message);
             } finally {
-                clearInterval(elapsedInterval); // Stop tracking elapsed time
+                clearInterval(elapsedInterval); 
             }
         }
 
@@ -1585,7 +1576,6 @@ max_grad=1e-3
         }
 
 
-       // Modified loadGeometryFromFile function
         function loadGeometryFromFile() {
             const fileInput = document.getElementById("loadGeometry");
             const geometryTextarea = document.getElementById("geometry");
@@ -1599,10 +1589,8 @@ max_grad=1e-3
                     const content = event.target.result.trim();
                     geometryTextarea.value = content;
                     
-                    // Update both the input preview and the viewer
                     updateInputPreview();
                     
-                    // Set system name from file name
                     const fileNameWithoutExtension = file.name.replace(/\.xyz$/i, "");
                     systemNameInput.value = fileNameWithoutExtension;
                     updateInputPreview(); 
@@ -1614,7 +1602,6 @@ max_grad=1e-3
         function saveAndDownloadFiles() {
             const systemName = document.getElementById("systemName").value || "geo";
             
-            // Save and download input file
             const inputContent = document.getElementById("inputPreview").value;
             const inputBlob = new Blob([inputContent], { type: "text/plain" });
             const inputUrl = URL.createObjectURL(inputBlob);
@@ -1624,7 +1611,6 @@ max_grad=1e-3
             inputLink.click();
             URL.revokeObjectURL(inputUrl);
 
-            // Save and download geometry file
             const geometry = document.getElementById("geometry").value.trim();
             const geoBlob = new Blob([geometry], { type: "text/plain" });
             const geoUrl = URL.createObjectURL(geoBlob);
@@ -1695,7 +1681,6 @@ max_grad=1e-3
                 select.style.display = "none";
             }
         }
-        // Initialize the viewer when the document is ready
         let viewer;
         $(document).ready(function() {
             viewer = $3Dmol.createViewer("viewer", {
@@ -1706,7 +1691,6 @@ max_grad=1e-3
             viewer.render();
         });
 
-        // Function to update the 3D viewer
         function updateViewer(xyzData) {
             if (!xyzData || !viewer) return;
             
