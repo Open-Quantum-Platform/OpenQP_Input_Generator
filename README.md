@@ -23,6 +23,25 @@ The **OpenQP Input Generator** is a user-friendly web-based tool designed to cre
 5. **Save Files**:  
    - Click **"Save Input & Geometry"** to download the `.inp` and `.xyz` files for use with OpenQP.  
 
+
+### **Option 2: Run Jobs Locally with Docker**
+Run quantum chemical calculations on your local machine by pulling the Docker image.
+
+#### Prerequisites:
+- Install [Docker](https://www.docker.com/get-started) on your local machine.
+
+#### Steps:
+1. **Pull the Docker Image**:
+   ```bash
+   docker pull openqp/openqp:gui
+   ```
+
+2. **Run the initiator**:
+   Start the program on your web browser:
+   ```bash
+   python3 Backend.py
+   ```
+
 ---
 
 ## Links
@@ -33,3 +52,10 @@ The **OpenQP Input Generator** is a user-friendly web-based tool designed to cre
 ---
 
 This tool is designed to streamline your quantum chemical calculations. For more advanced configurations and capabilities, visit the [OpenQP repository](https://github.com/Open-Quantum-Platform/openqp).  
+
+
+
+
+
+
+
