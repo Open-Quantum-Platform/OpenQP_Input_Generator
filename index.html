@@ -148,6 +148,43 @@ button:hover {
     font-size: 0.95rem;
     overflow-y: auto;
 }
+.inline-group {
+    display: flex;
+    gap: 1rem; 
+    align-items: center; 
+    margin-bottom: 1rem; 
+}
+
+.input-small {
+    flex: 1; 
+    max-width: 150px;
+}
+
+.input-small label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 400; 
+    font-size: 0.9rem;
+    color: #2d3748;
+}
+
+.input-small input {
+    width: 100%; 
+    padding: 0.5rem;
+    font-size: 0.9rem; 
+    font-weight: 400; 
+    color: #2d3748; 
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: #f8faff;
+}
+
+.input-small input:focus {
+    border-color: #4f93e6;
+    box-shadow: 0 0 5px rgba(79, 147, 230, 0.3);
+    outline: none;
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -1005,15 +1042,16 @@ button:hover {
             <p id="selectedFunctional">Selected Functional: None</p>
 
 
-            <div style="display: inline-block; margin-right: 10px;">
-                <label for="charge">Charge:</label>
-                <input type="number" id="charge" value="0" oninput="updateInputPreview()">
+            <div class="inline-group">
+                <div class="input-small">
+                    <label for="charge">Charge:</label>
+                    <input type="number" id="charge" value="0" oninput="updateInputPreview()">
+                </div>
+                <div class="input-small">
+                    <label for="multiplicity">Multiplicity:</label>
+                    <input type="number" id="multiplicity" value="1" oninput="updateInputPreview()">
+                </div>
             </div>
-            <div style="display: inline-block;">
-                <label for="multiplicity">Multiplicity:</label>
-                <input type="number" id="multiplicity" value="1" oninput="updateInputPreview()">
-            </div>
-
             <div style="margin-top: 1rem;">
                 <label for="nstate">Number of States for Response Theories:</label>
                 <input type="number" id="nstate" value="3" oninput="updateInputPreview()">
