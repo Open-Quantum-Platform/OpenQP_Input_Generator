@@ -13,10 +13,13 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="A professional tool for creating and managing OpenQP input files">
+        <meta name="keywords" content="Quantum Chemistry, OpenQP, Input Generator, MRSF-TDDFT">
         <title>OpenQP Input Generator</title>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
         <style>
             /* Reset and Base Styles */
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
@@ -24,220 +27,171 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Source Sans Pro', Arial, sans-serif;
-    line-height: 1.6;
-    color: #2d3748;
-    background: #f4f5f7;
-    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f5f8ff, #e2e8f2);
+    color: #333;
     display: flex;
     flex-direction: column;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
 }
 
-/* Header Styles */
+/* Header */
 header {
-    background: #1a202c;
-    color: #ffffff;
+    background: linear-gradient(135deg, #4f93e6, #3a6fa7);
+    color: white;
     text-align: center;
-    padding: 1rem 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-bottom: 3px solid #2b6cb0;
+    padding: 1.5rem;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 header h1 {
-    font-size: 2rem;
-    font-weight: 600;
-    word-break: keep-all; /* Prevent text from breaking awkwardly */
+    font-size: 2.4rem;
+    font-weight: 700;
 }
 
 header p {
     font-size: 1rem;
-    margin-top: 0.4rem;
-    opacity: 0.9;
+    margin-top: 0.5rem;
 }
 
-/* Main Layout */
+/* Container */
 .container {
-    display: flex;
-    flex-direction: column; /* Stack items vertically by default */
-    gap: 1.5rem;
-    width: 100%; /* Full width */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
     margin: auto;
-    padding: 1rem;
-    overflow-y: auto; /* Enable vertical scrolling */
 }
 
 .panel {
-    flex: 1;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    padding: 1rem 1.5rem;
-    width: 100%; /* Ensure panels span full width */
-    max-width: 100%; /* Remove width restriction */
-    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.panel:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 18px rgba(0, 0, 0, 0.2);
 }
 
 /* Headings */
 h2 {
     font-size: 1.5rem;
+    color: #4f93e6;
+    border-bottom: 2px solid #e0e4ec;
     margin-bottom: 1rem;
-    color: #2b6cb0;
-    border-bottom: 2px solid #edf2f7;
-    padding-bottom: 0.5rem;
 }
 
-h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-    color: #4a5568;
-}
-
-/* Form Elements */
-label {
-    display: block;
-    margin-bottom: 0.4rem;
-    font-weight: 600;
-    color: #4a5568;
-}
-
+/* Inputs */
 input, textarea, select {
     width: 100%;
-    padding: 0.75rem;
-    font-size: 0.9rem;
-    border: 1px solid #cbd5e0;
-    border-radius: 6px;
-    background: #f7fafc;
-    color: #2d3748;
+    padding: 0.7rem;
     margin-bottom: 1rem;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    -webkit-appearance: none; /* Fixes issues with dropdowns and inputs in Safari */
-}
-
-textarea {
-    resize: vertical;
-    min-height: 150px;
-    font-family: 'Courier New', monospace;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f8faff;
+    font-size: 0.9rem;
+    transition: box-shadow 0.2s ease-in-out, border 0.2s ease;
 }
 
 input:focus, textarea:focus, select:focus {
-    border-color: #3182ce;
-    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.3);
+    border-color: #4f93e6;
+    box-shadow: 0 0 8px rgba(79, 147, 230, 0.3);
 }
 
 /* Buttons */
 button {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #ffffff;
-    background: #3182ce;
+    background: linear-gradient(135deg, #4f93e6, #3a6fa7);
+    color: white;
     border: none;
-    border-radius: 6px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    -webkit-tap-highlight-color: transparent; /* Removes tap highlight in Safari */
+    transition: all 0.3s ease-in-out;
 }
 
 button:hover {
-    background: #2b6cb0;
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 147, 230, 0.3);
 }
 
-button:active {
-    background: #1e4e8c;
-    transform: translateY(0);
-}
-
-/* Preview Area */
-#inputPreview {
-    background: #edf2f7;
-    border: 1px solid #cbd5e0;
-    border-radius: 8px;
-    padding: 1rem;
-    font-family: 'Courier New', monospace;
-    font-size: 0.9rem;
-    color: #2d3748;
-    overflow-y: auto;
-    height: 420px;
-    white-space: pre-wrap;
-}
-
-/* Download Links */
-#downloadLinks {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-top: 1rem;
-}
-
-#downloadLinks a {
-    padding: 0.75rem 1.25rem;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #ffffff;
-    background: #4c51bf;
-    text-decoration: none;
-    border-radius: 6px;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-#downloadLinks a:hover {
-    background: #3c366b;
-    transform: translateY(-2px);
-}
-
-#downloadLinks a:active {
-    background: #2a2b4d;
-    transform: translateY(0);
-}
-
-/* Scrollbar Styling */
-.panel::-webkit-scrollbar {
-    width: 8px;
-}
-
-.panel::-webkit-scrollbar-thumb {
-    background: #cbd5e0;
-    border-radius: 4px;
-}
-
-.panel::-webkit-scrollbar-thumb:hover {
-    background: #a0aec0;
-}
-
-.panel::-webkit-scrollbar-track {
-    background: #f7fafc;
-}
-
-/* Responsive Adjustments */
-@media (min-width: 768px) {
-    .container {
-        flex-direction: row; /* Arrange panels side-by-side for larger screens */
-    }
-
-    .panel {
-        max-width: calc(50% - 1rem); /* Divide space evenly on large screens */
-    }
-}
-.viewer-section {
-    margin-bottom: 2em;
-    padding: 1em;
-    background: #fff;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-}
-
+/* Molecule Viewer */
 #viewer {
     width: 100%;
-    height: 300px;
-    position: relative;
-    background: #f8f9fa;
+    height: 350px; /* Adjust height for better visibility */
+    border: 1px solid #dce1eb;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative; /* Required for the 3Dmol.js canvas */
+    margin-bottom: 1.5rem; 
 }
 
+
+/* Generated Input */
+#inputPreview {
+    background: #ffffff;
+    border: 1px solid #dce1eb;
+    border-radius: 12px;
+    height: 300px;
+    padding: 1rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    overflow-y: auto;
+}
+.inline-group {
+    display: flex;
+    gap: 1rem; 
+    align-items: center; 
+    margin-bottom: 1rem; 
+}
+
+.input-small {
+    flex: 1; 
+    max-width: 150px;
+}
+
+.input-small label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 400; 
+    font-size: 0.9rem;
+    color: #2d3748;
+}
+
+.input-small input {
+    width: 100%; 
+    padding: 0.5rem;
+    font-size: 0.9rem; 
+    font-weight: 400; 
+    color: #2d3748; 
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: #f8faff;
+}
+
+.input-small input:focus {
+    border-color: #4f93e6;
+    box-shadow: 0 0 5px rgba(79, 147, 230, 0.3);
+    outline: none;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
         </style>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/3Dmol/2.0.3/3Dmol-min.js"></script>
@@ -1088,19 +1042,20 @@ button:active {
             <p id="selectedFunctional">Selected Functional: None</p>
 
 
-            <div style="display: inline-block; margin-right: 10px;">
-                <label for="charge">Charge:</label>
-                <input type="number" id="charge" value="0" oninput="updateInputPreview()">
+            <div class="inline-group">
+                <div class="input-small">
+                    <label for="charge">Charge:</label>
+                    <input type="number" id="charge" value="0" oninput="updateInputPreview()">
+                </div>
+                <div class="input-small">
+                    <label for="multiplicity">Multiplicity:</label>
+                    <input type="number" id="multiplicity" value="1" oninput="updateInputPreview()">
+                </div>
             </div>
-            <div style="display: inline-block;">
-                <label for="multiplicity">Multiplicity:</label>
-                <input type="number" id="multiplicity" value="1" oninput="updateInputPreview()">
+            <div style="margin-top: 1rem;">
+                <label for="nstate">Number of States for Response Theories:</label>
+                <input type="number" id="nstate" value="3" oninput="updateInputPreview()">
             </div>
-
-
-            <label for="nstate">Number of States for Response Theories:</label>
-            <input type="number" id="nstate" value="3"  oninput="updateInputPreview()">
-
             <div style="display: inline-block; margin-right: 10px;">
                 <label for="istate">Lower State for MECI Calculation:</label>
                 <input type="number" id="istate" value="1" oninput="updateInputPreview()">
