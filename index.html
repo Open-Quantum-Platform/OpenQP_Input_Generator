@@ -20,29 +20,46 @@
         <style>
             /* Reset and Base Styles */
 /* General Reset */
+/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: -webkit-linear-gradient(315deg, #f5f8ff, #e2e8f2);
+    background: -moz-linear-gradient(315deg, #f5f8ff, #e2e8f2);
     background: linear-gradient(135deg, #f5f8ff, #e2e8f2);
     color: #333;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
     min-height: 100vh;
 }
 
 /* Header */
 header {
+    background: -webkit-linear-gradient(315deg, #4f93e6, #3a6fa7);
+    background: -moz-linear-gradient(315deg, #4f93e6, #3a6fa7);
     background: linear-gradient(135deg, #4f93e6, #3a6fa7);
     color: white;
     text-align: center;
     padding: 1.5rem;
+    -webkit-border-bottom-left-radius: 20px;
+    -webkit-border-bottom-right-radius: 20px;
+    -moz-border-radius-bottomleft: 20px;
+    -moz-border-radius-bottomright: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
+    -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -58,7 +75,9 @@ header p {
 
 /* Container */
 .container {
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 1fr 2rem 1fr;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
     padding: 2rem;
@@ -68,15 +87,24 @@ header p {
 
 .panel {
     background: rgba(255, 255, 255, 0.85);
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
     border-radius: 15px;
     padding: 1.5rem;
+    -webkit-box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 .panel:hover {
+    -webkit-transform: translateY(-5px);
+    -ms-transform: translateY(-5px);
     transform: translateY(-5px);
+    -webkit-box-shadow: 0 12px 18px rgba(0, 0, 0, 0.2);
     box-shadow: 0 12px 18px rgba(0, 0, 0, 0.2);
 }
 
@@ -94,53 +122,76 @@ input, textarea, select {
     padding: 0.7rem;
     margin-bottom: 1rem;
     border: 1px solid #ddd;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
     border-radius: 8px;
     background: #f8faff;
     font-size: 0.9rem;
-    transition: box-shadow 0.2s ease-in-out, border 0.2s ease;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 input:focus, textarea:focus, select:focus {
     border-color: #4f93e6;
+    -webkit-box-shadow: 0 0 8px rgba(79, 147, 230, 0.3);
     box-shadow: 0 0 8px rgba(79, 147, 230, 0.3);
+    outline: none;
 }
 
 /* Buttons */
 button {
+    background: -webkit-linear-gradient(315deg, #4f93e6, #3a6fa7);
+    background: -moz-linear-gradient(315deg, #4f93e6, #3a6fa7);
     background: linear-gradient(135deg, #4f93e6, #3a6fa7);
     color: white;
     border: none;
     padding: 0.8rem 1.5rem;
     font-size: 1rem;
     font-weight: 600;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
     border-radius: 8px;
     cursor: pointer;
+    -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 button:hover {
+    -webkit-transform: translateY(-2px);
+    -ms-transform: translateY(-2px);
     transform: translateY(-2px);
+    -webkit-box-shadow: 0 4px 12px rgba(79, 147, 230, 0.3);
     box-shadow: 0 4px 12px rgba(79, 147, 230, 0.3);
 }
 
 /* Molecule Viewer */
 #viewer {
     width: 100%;
-    height: 350px; /* Adjust height for better visibility */
+    height: 350px;
     border: 1px solid #dce1eb;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
     border-radius: 12px;
     background-color: #ffffff;
+    -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    position: relative; /* Required for the 3Dmol.js canvas */
-    margin-bottom: 1.5rem; 
+    position: relative;
+    margin-bottom: 1.5rem;
 }
-
 
 /* Generated Input */
 #inputPreview {
     background: #ffffff;
     border: 1px solid #dce1eb;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
     border-radius: 12px;
     height: 300px;
     padding: 1rem;
@@ -148,41 +199,79 @@ button:hover {
     font-size: 0.95rem;
     overflow-y: auto;
 }
+
 .inline-group {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    gap: 1rem; 
-    align-items: center; 
-    margin-bottom: 1rem; 
+    gap: 1rem;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 
 .input-small {
-    flex: 1; 
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
     max-width: 150px;
 }
 
 .input-small label {
     display: block;
     margin-bottom: 0.4rem;
-    font-weight: 400; 
+    font-weight: 400;
     font-size: 0.9rem;
     color: #2d3748;
 }
 
 .input-small input {
-    width: 100%; 
+    width: 100%;
     padding: 0.5rem;
-    font-size: 0.9rem; 
-    font-weight: 400; 
-    color: #2d3748; 
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #2d3748;
     border: 1px solid #ccc;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
     border-radius: 6px;
     background: #f8faff;
 }
 
 .input-small input:focus {
     border-color: #4f93e6;
+    -webkit-box-shadow: 0 0 5px rgba(79, 147, 230, 0.3);
     box-shadow: 0 0 5px rgba(79, 147, 230, 0.3);
     outline: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+    }
+}
+
+/* iOS Specific Fixes */
+@supports (-webkit-touch-callout: none) {
+    body {
+        min-height: -webkit-fill-available;
+    }
+}
+
+/* Touch Device Optimization */
+@media (hover: none) {
+    .panel:hover {
+        transform: none;
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    button:hover {
+        transform: none;
+        box-shadow: none;
+    }
 }
 
 
